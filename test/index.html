@@ -50,20 +50,20 @@
         		
             }
     		
-    		// Checkboxes
-    		module('input type="checkbox"');
-    		
-    		generateInputs('checkbox');
-    		
-    		test("jQuery 'trigger' image", function(){
-    		
+            // Checkboxes
+            module('input type="checkbox"');
+            
+            generateInputs('checkbox');
+            
+            test("jQuery 'trigger' image", function(){
+            
                 $('.checkbox_yay').eq(0).trigger('click');
                 $('.checkbox_yay').eq(3).trigger('click');
                 equals($('input:checkbox:checked').length, 2, "2 checkboxes should be checked");
                 
             });
             
-    		test("jQuery 'trigger' labels", function(){
+            test("jQuery 'trigger' labels", function(){
                 
                 $('label[for="orange"]').trigger('click');
                 $('label[for="grapefruit"]').trigger('click');
@@ -72,25 +72,25 @@
                 
                 $('#wrap-checkbox').hide();
                 
-    		});
+            });
     		
-    		//-------------------------------------------------------------------------------
-    		
-    		// Radios
-    		module('input type="radio"');
-    		
-    		generateInputs('radio');
-    		
-    		test("jQuery 'trigger' image", function(){
-    		    
-    		    equals($('input:radio:checked').length, 0, "0 radios should be checked");
+            //-------------------------------------------------------------------------------
+            
+            // Radios
+            module('input type="radio"');
+            
+            generateInputs('radio');
+            
+            test("jQuery 'trigger' image", function(){
+                
+                equals($('input:radio:checked').length, 0, "0 radios should be checked");
                 $('.radio_yay').eq(0).trigger('click');
                 $('.radio_yay').eq(1).trigger('click');
                 equals($('input:radio:checked').length, 1, "1 radio should be checked");
                 
             });
             
-    		test("jQuery 'trigger' labels", function(){
+            test("jQuery 'trigger' labels", function(){
                 
                 $('label[for="both"]').trigger('click');
                 $('label[for="male"]').trigger('click');
@@ -98,7 +98,7 @@
                 
                 $('#wrap-radio').hide();
                 
-    		});
+            });
     		
         });
     
