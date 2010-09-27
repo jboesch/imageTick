@@ -11,7 +11,7 @@
 
 (function($){
 		  
-	$.fn.imageTick = function(options) {
+    $.fn.imageTick = function(options) {
 		
         var defaults = {	
         	tick_image_path: "images/radio.gif",
