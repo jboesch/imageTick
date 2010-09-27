@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">google.load('jquery','1.4.2');</script>
+<script type="text/javascript" src="js/jquery.imagetick.js"></script>
+<script type="text/javascript">
+
+	$(function(){
+		
+		$("input[name='favlang']").imageTick({
+			tick_image_path: "images/radio.gif", 
+			no_tick_image_path: "images/no_radio.gif",
+			image_tick_class: "radios"
+		});
+		
+
+		$("input[name='favsoup']").imageTick({ 
+			tick_image_path: "images/check.gif",
+			no_tick_image_path: "images/no_check.gif",
+			image_tick_class: "checkboxes"
+		});
+
+		
+	});
+	
+	var switched = false;
+	
+	function revealToggle(e){
+		
+		if(!switched){
+			$("input[type='checkbox'],input[type='radio']").css('display','inline');
+			$(e).val('Hide the REAL checkboxes/radios');
+			switched = true;
+		} else {
+			$("input[type='checkbox'],input[type='radio']").css('display','none');
+			$(e).val('Show me the REAL checkboxes/radios');
+			switched = false;
+		}
+		
+	}
+	
+</script>
+<style type="text/css">
+	* {
+		margin:0;
+		padding:0;
+	}
+	body {
+		padding:20px;
+	}
+	h2, h4 {
+		margin:10px 0;
+	}	
+	ul li {
+		list-style:none;
+		margin:5px 0;
+	}
+	input {
+		margin:0 0 0 8px;
+	}
+
+</style>
+</head>
+
+<body>
+
+<h2>Radio Buttons</h2>
+<h4>Pick a language</h4>
+<ul>
+	<li>
+		<input type="radio" value="php" id="php" name="favlang" />
+		<label for="php">PHP</label>
+	</li>
+	<li>
+		<input type="radio" id="javascript" value="javascript" name="favlang" checked="checked" />
+		<label for="javascript">Javascript</label>
+	</li>
+	<li>
+		<input type="radio" id="html" value="html" name="favlang" />
+		<label for="html">HTML</label>
+	</li>
+	<li>
+		<input type="radio" id="sql" value="sql" name="favlang" />
+		<label for="sql">SQL</label>
+	</li>
+	<li>
+		<input type="radio" id="japanese" value="japanese" name="favlang" />
+		<label for="japanese">Japanese</label>
+	</li>
+</ul>
+
+<h2>Checkboxes</h2>
+<h4>Pick a soup</h4>
+<ul>
+	<li>
+		<input type="checkbox" value="pea" name="favsoup" id="pea" checked="checked" />
+		<label for="pea">Pea Soup</label>
+	</li>
+	<li>
+		<input type="checkbox" value="chicken" name="favsoup" id="chicken" />
+		<label for="chicken">Chicken Soup</label>
+	</li>
+</ul>
+
+<input type="button" name="submit" style="padding:3px;margin:20px 0;" value="Show me the REAL checkboxes/radios" onclick="revealToggle(this);" />
+
+</body>
+</html>

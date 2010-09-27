@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+                    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <link rel="stylesheet" href="http://github.com/jquery/qunit/raw/master/qunit/qunit.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="http://github.com/jquery/qunit/raw/master/qunit/qunit.js"></script>
+    
+    <script type="text/javascript" src="../js/jquery.imagetick.js"></script>
+    <script type="text/javascript">
+        
+        $(function(){
+            
+            function generateInputs(gen_type){
+                
+                var id_map = {
+                    'checkbox': {
+                        values: ['apple', 'orange', 'banana', 'grapefruit'],
+                        images: ['check', 'no_check']
+                    },
+                    'radio': {
+                        values: ['male', 'female', 'both'],
+                        name: 'preference',
+                        images: ['radio', 'no_radio']
+                    }
+                };
+                
+                var input_checkbox_ids = id_map[gen_type].values;
+                var input_out_str = '';
+                
+                $.each(input_checkbox_ids, function(i, id){
+                    input_out_str += '<input type="' + gen_type + '" id="' + id + '"';
+                    
+                    // radios need a name attribute
+                    if(id_map[gen_type].name){
+                        input_out_str += ' name="' + id_map[gen_type].name + '"';
+                    }
+                    
+                    input_out_str += ' class="inputs-' + gen_type + '" value="' + id + '" />';
+                    input_out_str += '<label for="' + id + '">' + id + '</label>'
+                });
+                
+                $('body').append('<div id="wrap-' + gen_type + '">' + input_out_str + '</div>');
+                
+                $("input.inputs-" + gen_type).imageTick({
+        			tick_image_path: "../images/" + id_map[gen_type].images[0] + ".gif", 
+        			no_tick_image_path: "../images/" + id_map[gen_type].images[1] + ".gif",
+        			image_tick_class: gen_type + "_yay"
+        		});
+        		
+            }
+    		
+    		// Checkboxes
+    		module('input type="checkbox"');
+    		
+    		generateInputs('checkbox');
+    		
+    		test("jQuery 'trigger' image", function(){
+    		
+                $('.checkbox_yay').eq(0).trigger('click');
+                $('.checkbox_yay').eq(3).trigger('click');
+                equals($('input:checkbox:checked').length, 2, "2 checkboxes should be checked");
+                
+            });
+            
+    		test("jQuery 'trigger' labels", function(){
+                
+                $('label[for="orange"]').trigger('click');
+                $('label[for="grapefruit"]').trigger('click');
+                $('label[for="apple"]').trigger('click');
+                equals($('input:checkbox:checked').length, 1, "1 checkbox should be checked");
+                
+                $('#wrap-checkbox').hide();
+                
+    		});
+    		
+    		//-------------------------------------------------------------------------------
+    		
+    		// Radios
+    		module('input type="radio"');
+    		
+    		generateInputs('radio');
+    		
+    		test("jQuery 'trigger' image", function(){
+    		    
+    		    equals($('input:radio:checked').length, 0, "0 radios should be checked");
+                $('.radio_yay').eq(0).trigger('click');
+                $('.radio_yay').eq(1).trigger('click');
+                equals($('input:radio:checked').length, 1, "1 radio should be checked");
+                
+            });
+            
+    		test("jQuery 'trigger' labels", function(){
+                
+                $('label[for="both"]').trigger('click');
+                $('label[for="male"]').trigger('click');
+                equals($('input:radio:checked').length, 1, "1 radio should be checked");
+                
+                $('#wrap-radio').hide();
+                
+    		});
+    		
+        });
+    
+    </script>
+
+</head>
+<body>
+    <h1 id="qunit-header">imageTick for jQuery - v2.0</h1>
+    <h2 id="qunit-banner"></h2>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+</body>
+</html>
