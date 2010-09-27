@@ -42,7 +42,7 @@
             
         }
 		
-		/*
+        /*
         * When the user clicks on the radio/checkbox image, they are taken to this function to
         * determine what to do with the cooresponding labels and inputs
         *
@@ -105,7 +105,7 @@
                 e.preventDefault();	
 			    // Pass a boolean true to say we're coming from the label
                 $img_id.trigger('click', true);
-			});
+            });
 			
         });
     }
