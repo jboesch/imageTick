@@ -11,7 +11,7 @@
         
         $(function(){
             
-            function generateInputs(gen_type){
+            function generateInputs(gen_type, class_id_key){
                 
                 var id_map = {
                     'checkbox': {
@@ -22,30 +22,37 @@
                         values: ['male', 'female', 'both'],
                         name: 'preference',
                         images: ['radio', 'no_radio']
+                    },
+                    'radio2': {
+                        values: ['face', 'nose', 'ear', 'eye'],
+                        name: 'body_part',
+                        images: ['radio', 'no_radio']
                     }
                 };
                 
                 var input_checkbox_ids = id_map[gen_type].values;
                 var input_out_str = '';
                 
+                var input_type = (gen_type.indexOf('radio') != -1) ? 'radio' : 'checkbox';
+                
                 $.each(input_checkbox_ids, function(i, id){
-                    input_out_str += '<input type="' + gen_type + '" id="' + id + '"';
+                    input_out_str += '<input type="' + input_type + '" id="' + id + '"';
                     
                     // radios need a name attribute
                     if(id_map[gen_type].name){
                         input_out_str += ' name="' + id_map[gen_type].name + '"';
                     }
                     
-                    input_out_str += ' class="inputs-' + gen_type + '" value="' + id + '" />';
+                    input_out_str += ' class="inputs-' + gen_type + '-' + class_id_key + '" value="' + id + '" />';
                     input_out_str += '<label for="' + id + '">' + id + '</label>'
                 });
                 
-                $('body').append('<div id="wrap-' + gen_type + '">' + input_out_str + '</div>');
+                $('body').append('<div id="wrap-' + gen_type + '-' + class_id_key + '">' + input_out_str + '</div>');
                 
-                $("input.inputs-" + gen_type).imageTick({
+                $("input.inputs-" + gen_type + '-' + class_id_key).imageTick({
         			tick_image_path: "../images/" + id_map[gen_type].images[0] + ".gif", 
         			no_tick_image_path: "../images/" + id_map[gen_type].images[1] + ".gif",
-        			image_tick_class: gen_type + "_yay"
+        			image_tick_class: gen_type + "_yay_" + class_id_key
         		});
         		
             }
@@ -53,12 +60,13 @@
             // Checkboxes
             module('input type="checkbox"');
             
-            generateInputs('checkbox');
+            var cbox_id = 1123; // random :)
+            generateInputs('checkbox', cbox_id);
             
             test("jQuery 'trigger' image", function(){
             
-                $('.checkbox_yay').eq(0).trigger('click');
-                $('.checkbox_yay').eq(3).trigger('click');
+                $('.checkbox_yay_' + cbox_id).eq(0).trigger('click');
+                $('.checkbox_yay_' + cbox_id).eq(3).trigger('click');
                 equals($('input:checkbox:checked').length, 2, "2 checkboxes should be checked");
                 
             });
@@ -70,7 +78,7 @@
                 $('label[for="apple"]').trigger('click');
                 equals($('input:checkbox:checked').length, 1, "1 checkbox should be checked");
                 
-                $('#wrap-checkbox').hide();
+                $('#wrap-checkbox-' + cbox_id).hide();
                 
             });
     		
@@ -79,13 +87,16 @@
             // Radios
             module('input type="radio"');
             
-            generateInputs('radio');
+            var radio_id = 234; // random :)
+            var radio_id_2 = 345345; // random :)
+            
+            generateInputs('radio', radio_id);
             
             test("jQuery 'trigger' image", function(){
                 
                 equals($('input:radio:checked').length, 0, "0 radios should be checked");
-                $('.radio_yay').eq(0).trigger('click');
-                $('.radio_yay').eq(1).trigger('click');
+                $('.radio_yay_' + radio_id).eq(0).trigger('click');
+                $('.radio_yay_' + radio_id).eq(1).trigger('click');
                 equals($('input:radio:checked').length, 1, "1 radio should be checked");
                 
             });
@@ -96,7 +107,24 @@
                 $('label[for="male"]').trigger('click');
                 equals($('input:radio:checked').length, 1, "1 radio should be checked");
                 
-                $('#wrap-radio').hide();
+                $('#wrap-radio-' + radio_id).hide();
+                
+            });
+            
+             
+            generateInputs('radio2', radio_id_2);
+            
+            test('multiple radios', function(){
+            
+                $('label[for="face"]').trigger('click');
+                equals($('.inputs-radio2-' + radio_id_2 + ':checked').val(), 'face', 'Should return "face" as the selected value');
+                $('label[for="eye"]').trigger('click');
+                equals($('.inputs-radio2-' + radio_id_2 + ':checked').val(), 'eye', 'Should return "eye" as the selected value');
+                
+                $('.radio2_yay_' + radio_id_2).eq(1).trigger('click');
+                equals($('.inputs-radio2-' + radio_id_2 + ':checked').val(), 'nose', 'Should return "nose" as the selected value');
+
+                $('#wrap-radio2-' + radio_id_2).hide();
                 
             });
     		

@@ -14,14 +14,14 @@
     $.fn.imageTick = function(options) {
 		
         var defaults = {	
-        	tick_image_path: "images/radio.gif",
-        	no_tick_image_path: "no_images/radio.gif",
-        	image_tick_class: "ticks_" + Math.floor(Math.random()),
-        	hide_radios_checkboxes: true,
-        	tick_img_id_format: 'tick_img_%s',
-        	logging: false,
-        	img_html: '<img src="%s1" alt="no_tick" class="%s2" id="tick_img_%s3" />',
-        	_valid_types: ['checkbox', 'radio']
+            tick_image_path: "images/radio.gif",
+            no_tick_image_path: "no_images/radio.gif",
+            image_tick_class: "ticks_" + Math.floor(Math.random() * 999999),
+            hide_radios_checkboxes: true,
+            tick_img_id_format: 'tick_img_%s',
+            logging: false,
+            img_html: '<img src="%s1" alt="no_tick" class="%s2" id="tick_img_%s3" />',
+            _valid_types: ['checkbox', 'radio']
         };
         	
         var opt = $.extend(defaults, options);
@@ -60,7 +60,7 @@
             }
             else {
                 $("." + opt.image_tick_class).attr('src', opt.no_tick_image_path);
-                var img_src = opt.tick_image_path;;
+                var img_src = opt.tick_image_path;
             }
 			
             this.src = img_src;
@@ -103,11 +103,11 @@
             // Handle clicks for the labels
             $("label[for='" + id + "']").click(function(e){
                 e.preventDefault();	
-			    // Pass a boolean true to say we're coming from the label
+                // Pass a boolean true to say we're coming from the label
                 $img_id.trigger('click', true);
             });
 			
         });
-    }
+    };
 	
 })(jQuery);
