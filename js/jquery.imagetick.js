@@ -48,9 +48,8 @@
         *
         * @param type {String} Is it a 'checkbox' or a 'radio'
         * @param $input_id {jQuery Object} The id of the real <input>
-        * @param coming_from_label {Boolean} If we've clicked on the label and we're being sent here
         */
-        function handleClickType(type, $input_id, coming_from_label){
+        function handleClickType(type, $input_id){
             
             $input_id.trigger("click");
             
@@ -96,15 +95,14 @@
             
             // Delegate the click off to a function that will determine what to do with
             // it based on if it's a checkbox or a radio button
-            $img_id.click(function(e, coming_from_label){
-                handleClickType.call(this, type, $input_id, coming_from_label);
+            $img_id.click(function(e){
+                handleClickType.call(this, type, $input_id);
             });
 			
             // Handle clicks for the labels
             $("label[for='" + id + "']").click(function(e){
                 e.preventDefault();	
-                // Pass a boolean true to say we're coming from the label
-                $img_id.trigger('click', true);
+                $img_id.trigger('click');
             });
 			
         });
