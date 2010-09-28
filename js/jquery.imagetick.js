@@ -15,7 +15,7 @@
 		
         var defaults = {	
             tick_image_path: "images/radio.gif",
-            no_tick_image_path: "no_images/radio.gif",
+            no_tick_image_path: "images/no_radio.gif",
             image_tick_class: "ticks_" + Math.floor(Math.random() * 999999),
             hide_radios_checkboxes: true,
             tick_img_id_format: 'tick_img_%s',
@@ -24,7 +24,7 @@
             _valid_types: ['checkbox', 'radio']
         };
         	
-        var opt = $.extend(defaults, options);
+        var opt = $.extend({}, defaults, options);
 		
         /*
         * When we click on the image, we need to compare images to see if we're
