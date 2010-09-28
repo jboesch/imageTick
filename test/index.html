@@ -77,6 +77,7 @@
                 $('label[for="grapefruit"]').trigger('click');
                 $('label[for="apple"]').trigger('click');
                 equals($('input:checkbox:checked').length, 1, "1 checkbox should be checked");
+                equals($('input:checkbox:checked').val(), 'orange', "'orange' should be checked");
                 
                 $('#wrap-checkbox-' + cbox_id).hide();
                 
