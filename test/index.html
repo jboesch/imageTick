@@ -128,6 +128,16 @@
                 $('#wrap-radio2-' + radio_id_2).hide();
                 
             });
+            
+            test('disabled radios', function(){
+                
+                $('#tick_img_face').trigger('click');
+                $('#face').imageTick('disabled', true);
+                equals($('.inputs-radio2-' + radio_id_2).not(':disabled').length, 3, 'count radios that are not disabled');
+                $('#face').imageTick('disabled', false);
+                equals($('.inputs-radio2-' + radio_id_2).not(':disabled').length, 4, '');
+            
+            });
     		
         });
     
