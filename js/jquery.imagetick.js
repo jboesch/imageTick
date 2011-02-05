@@ -2,11 +2,11 @@
 * imageTick for jQuery
 * http://boedesign.com/blog/2008/06/08/imagetick-for-jquery/
 *
-* Copyright (c) 2010 Jordan Boesch
+* Copyright (c) 2011 Jordan Boesch
 * Dual licensed under the MIT and GPL licenses.
 *
-* Date: September 28, 2010
-* Version: 2.1
+* Date: February 5, 2011
+* Version: 2.2
 */
 
 (function($){
@@ -123,13 +123,13 @@
         }
 		
         // Loop through each one of our elements
-        this.each(function(){
+        return this.each(function(){
 			
             var $obj = $(this);
             var type = $obj[0].type; // radio or checkbox
 			
             if($.inArray(type, opt._valid_types) == -1){
-                return;
+                throw new Error(type + ' is not a valid input type. Must be radio or checkbox.');
             }
 			
             var id = $obj[0].id;

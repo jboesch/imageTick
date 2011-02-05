@@ -5,7 +5,7 @@
 <title>imageTick Example</title>
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type="text/javascript">google.load('jquery','1.4.2');</script>
-<script type="text/javascript" src="js/jquery.imagetick.min.js"></script>
+<script type="text/javascript" src="js/jquery.imagetick.js"></script>
 <script type="text/javascript">
 
 	$(function(){
@@ -23,7 +23,9 @@
 			    $label.hide();
 			    return '<div class="custom-radio">' + $label.text() + '</div>';
 			}
-		});
+		}).click(function(){
+            alert('You clicked a fav color!');
+        });
 		
 		$("input[name='favsoup']").imageTick({ 
 			custom_button: function($label){
