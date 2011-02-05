@@ -6,6 +6,10 @@ http://boedesign.com/blog/2008/06/08/imagetick-for-jquery/
 
 ## Change Log
 
+### Changes in 2.2 (February, 2011)
+
+* Added ability to chain after you call imageTick
+
 ### Changes in 2.0 (September 27, 2010)
 
 * Complete re-write
