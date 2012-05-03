@@ -50,7 +50,7 @@
                 $('body').append('<div id="wrap-' + gen_type + '-' + class_id_key + '">' + input_out_str + '</div>');
                 
                 $("input.inputs-" + gen_type + '-' + class_id_key).imageTick({
-        			tick_image_path: "../images/" + id_map[gen_type].images[0] + ".gif", 
+                            		tick_image_path: "../images/" + id_map[gen_type].images[0] + ".gif", 
         			no_tick_image_path: "../images/" + id_map[gen_type].images[1] + ".gif",
         			image_tick_class: gen_type + "_yay_" + class_id_key
         		});
@@ -67,7 +67,7 @@
             
                 $('.checkbox_yay_' + cbox_id).eq(0).trigger('click');
                 $('.checkbox_yay_' + cbox_id).eq(3).trigger('click');
-                equals($('input:checkbox:checked').length, 2, "2 checkboxes should be checked");
+                equal($('input:checkbox:checked').length, 2, "2 checkboxes should be checked");
                 
             });
             
@@ -76,8 +76,8 @@
                 $('label[for="orange"]').trigger('click');
                 $('label[for="grapefruit"]').trigger('click');
                 $('label[for="apple"]').trigger('click');
-                equals($('input:checkbox:checked').length, 1, "1 checkbox should be checked");
-                equals($('input:checkbox:checked').val(), 'orange', "'orange' should be checked");
+                equal($('input:checkbox:checked').length, 1, "1 checkbox should be checked");
+                equal($('input:checkbox:checked').val(), 'orange', "'orange' should be checked");
                 
                 $('#wrap-checkbox-' + cbox_id).hide();
                 
@@ -95,10 +95,10 @@
             
             test("jQuery 'trigger' image", function(){
                 
-                equals($('input:radio:checked').length, 0, "0 radios should be checked");
+                equal($('input:radio:checked').length, 0, "0 radios should be checked");
                 $('.radio_yay_' + radio_id).eq(0).trigger('click');
                 $('.radio_yay_' + radio_id).eq(1).trigger('click');
-                equals($('input:radio:checked').length, 1, "1 radio should be checked");
+                equal($('input:radio:checked').length, 1, "1 radio should be checked");
                 
             });
             
@@ -106,7 +106,7 @@
                 
                 $('label[for="both"]').trigger('click');
                 $('label[for="male"]').trigger('click');
-                equals($('input:radio:checked').length, 1, "1 radio should be checked");
+                equal($('input:radio:checked').length, 1, "1 radio should be checked");
                 
                 $('#wrap-radio-' + radio_id).hide();
                 
@@ -118,12 +118,12 @@
             test('multiple radios', function(){
             
                 $('label[for="face"]').trigger('click');
-                equals($('.inputs-radio2-' + radio_id_2 + ':checked').val(), 'face', 'Should return "face" as the selected value');
+                equal($('.inputs-radio2-' + radio_id_2 + ':checked').val(), 'face', 'Should return "face" as the selected value');
                 $('label[for="eye"]').trigger('click');
-                equals($('.inputs-radio2-' + radio_id_2 + ':checked').val(), 'eye', 'Should return "eye" as the selected value');
+                equal($('.inputs-radio2-' + radio_id_2 + ':checked').val(), 'eye', 'Should return "eye" as the selected value');
                 
                 $('.radio2_yay_' + radio_id_2).eq(1).trigger('click');
-                equals($('.inputs-radio2-' + radio_id_2 + ':checked').val(), 'nose', 'Should return "nose" as the selected value');
+                equal($('.inputs-radio2-' + radio_id_2 + ':checked').val(), 'nose', 'Should return "nose" as the selected value');
 
                 $('#wrap-radio2-' + radio_id_2).hide();
                 
@@ -133,9 +133,9 @@
                 
                 $('#tick_img_face').trigger('click');
                 $('#face').imageTick('disabled', true);
-                equals($('.inputs-radio2-' + radio_id_2).not(':disabled').length, 3, 'count radios that are not disabled');
+                equal($('.inputs-radio2-' + radio_id_2).not(':disabled').length, 3, 'count radios that are not disabled');
                 $('#face').imageTick('disabled', false);
-                equals($('.inputs-radio2-' + radio_id_2).not(':disabled').length, 4, '');
+                equal($('.inputs-radio2-' + radio_id_2).not(':disabled').length, 4, '');
             
             });
     		
